@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Order do
   context 'validations' do
-    it { should define_enum_for(:status).with(:pending, :accepted, :preparing, :delivered) } 
+    it { should define_enum_for(:status).with(pending: 'pending', accepted: 'accepted', preparing: 'preparing',delivered: 'delivered') } 
+
     it { should validate_presence_of(:total_price) }
     
     it 'total price should be a decimal number' do
