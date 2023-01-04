@@ -5,8 +5,9 @@ RSpec.describe User do
     it { should validate_presence_of(:full_name) }
     it { should validate_presence_of(:phone_number) }
     it { should validate_presence_of(:email) }
-    it { should allow_value('augusto@email.com').for(:email)} 
-  end
+    it { should allow_value('augusto@email.com').for(:email)}
+    it { should define_enum_for(:type).with(costumer: 'costumer', courier: 'courier').backed_by_column_of_type(:string) } 
+   end
 
   context 'associations' do
     it { should have_many(:orders) }
