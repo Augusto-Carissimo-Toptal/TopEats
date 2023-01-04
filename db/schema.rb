@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_151609) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_202217) do
+  create_table "addresses", force: :cascade do |t|
+    t.string "address_field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "adresses", force: :cascade do |t|
+    t.string "adress_field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.integer "phone_number"
@@ -18,12 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_151609) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "adress_id", null: false
+    t.integer "address_id", null: false
+    t.index ["address_id"], name: "index_users_on_address_id"
+    t.index ["adress_id"], name: "index_users_on_adress_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
     t.string "vehicle_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "adress_id", null: false
+    t.index ["adress_id"], name: "index_vehicles_on_adress_id"
   end
 
+  add_foreign_key "users", "addresses"
+  add_foreign_key "users", "adresses"
+  add_foreign_key "vehicles", "adresses"
 end
