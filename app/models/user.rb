@@ -6,4 +6,6 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
   validates :email, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  
+  enum type: { costumer: 'costumer', courier: 'courier' }
 end
