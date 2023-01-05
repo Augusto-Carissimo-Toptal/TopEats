@@ -11,6 +11,6 @@ RSpec.describe User do
 
   context 'associations' do
     it { should have_many(:orders) }
-    it { should have_one(:adress) }
+    it { should have_one(:address) }
   end
 end
