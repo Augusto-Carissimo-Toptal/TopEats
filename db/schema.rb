@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_111823) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_122030) do
   create_table "addresses", force: :cascade do |t|
     t.string "address_field"
     t.datetime "created_at", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_111823) do
     t.string "vehicle_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "courier_id"
   end
 
   add_foreign_key "order_menus", "menu_items", column: "menu_items_id"

@@ -6,6 +6,6 @@ RSpec.describe Vehicle do
   end
 
   context 'associations' do
-    it { should have_one(:courier) }
+    it { should belong_to(:courier) }
   end
 end
