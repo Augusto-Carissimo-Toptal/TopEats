@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum type: { costumer: 'costumer', courier: 'courier' }
+  enum type: { customer: 'customer', courier: 'courier' }
   
   validates :full_name, presence: true
   validates :phone_number, presence: true
