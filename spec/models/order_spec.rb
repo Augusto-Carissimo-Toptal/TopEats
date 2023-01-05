@@ -14,7 +14,7 @@ RSpec.describe Order do
   end
 
   context 'associations' do
-    it { should belong_to(:costumer) }
+    it { should belong_to(:customer) }
     it { should belong_to(:courier) }
     it { have_many(:menu_items)}
   end
