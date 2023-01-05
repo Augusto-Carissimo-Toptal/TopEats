@@ -10,17 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_202611) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_111823) do
   create_table "addresses", force: :cascade do |t|
     t.string "address_field"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "adresses", force: :cascade do |t|
-    t.string "adress_field"
+  create_table "menu_items", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_menus", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "menu_items_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_items_id"], name: "index_order_menus_on_menu_items_id"
+    t.index ["order_id"], name: "index_order_menus_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "status"
+    t.float "total_price"
+    t.integer "courier_id"
+    t.integer "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["courier_id"], name: "index_orders_on_courier_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_202611) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "order_menus", "menu_items", column: "menu_items_id"
+  add_foreign_key "order_menus", "orders"
+  add_foreign_key "orders", "couriers"
+  add_foreign_key "orders", "customers"
   add_foreign_key "users", "addresses"
 end
