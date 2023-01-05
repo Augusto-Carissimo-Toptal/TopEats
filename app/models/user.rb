@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
    
   has_many :orders
-  has_one :adress
+  has_one :address
 end
