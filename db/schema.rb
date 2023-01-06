@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_123542) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_132636) do
   create_table "addresses", force: :cascade do |t|
     t.string "address_field"
     t.datetime "created_at", null: false
@@ -59,8 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_123542) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "address_id", null: false
-    t.index ["address_id"], name: "index_users_on_address_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -76,5 +74,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_123542) do
   add_foreign_key "orders", "customers"
   add_foreign_key "user_addresses", "addresses"
   add_foreign_key "user_addresses", "users"
-  add_foreign_key "users", "addresses"
 end
