@@ -7,7 +7,16 @@ class CustomersController < ApplicationController
   end
   
   def show
+    @customer = Customer.find(params[:id])
     render json: @customer
   end
+  
+  def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    render json: Customer.all
+  end
+
+  
 
 end
