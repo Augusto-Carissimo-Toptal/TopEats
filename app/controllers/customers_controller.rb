@@ -1,24 +1,28 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[ show update destroy ]
+
+  before_action :set_customer, only: [:show, :update, :destroy]
   
   def index 
     @customers = Customer.all
-    
+
     render json: @customers
   end
-  
+
   def show
-    @customer = Customer.find(params[:id])
     render json: @customer
   end
 
   def create
     @customer = Customer.new(customer_params)
 
-    if @customer.save
-      render :show, status: :created, location: @customer
-    else
-      render json: @customer.errors, status: :unprocessable_entity 
+    respond_to do |format|
+      if @customer.save
+        format.html { redirect_to customer_url(@customer), notice: "Customer was successfully created." }
+        format.json { render :show, status: :created, location: @customer }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -31,16 +35,22 @@ class CustomersController < ApplicationController
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
     @customer.destroy
-    head :no_content 
+
+    respond_to do |format|
+      format.html { redirect_to widgets_url, notice: "Customer was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
+
 
   private
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
-  def customer_params
-    params.require(:customer).permit(:full_name,:phone_number, :email)
-  end
+    def set_customer
+      @customer = Customer.find(params[:id])
+    end
+  
+    def customer_params
+      params.require(:customer).permit(:full_name,:phone_number, :email)
+    end
 end
