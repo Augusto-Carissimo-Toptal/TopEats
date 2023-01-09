@@ -15,15 +15,12 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to customer_url(@customer), notice: "Customer was successfully created." }
-        format.json { render :show, status: :created, location: @customer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.save
+      render :show, status: :created, location: @customer 
+    else
+      render json: @customer.errors, status: :unprocessable_entity 
     end
+  
   end
 
   def update
@@ -38,10 +35,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.destroy
 
-    respond_to do |format|
-      format.html { redirect_to widgets_url, notice: "Customer was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    head :no_content 
   end
 
 
