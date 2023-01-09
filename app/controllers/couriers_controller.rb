@@ -38,7 +38,6 @@ class CouriersController < ApplicationController
     head :no_content 
   end
 
-
   private
     def set_courier
       @courier = Courier.find(params[:id])
