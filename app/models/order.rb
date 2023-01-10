@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   enum status: { pending: 'pending', accepted: 'accepted', preparing: 'preparing', delivered: 'delivered' }
-  validates :total_price, presence: true
+  validates :total_price, presence: true, numericality: {only_float: true}
 
   belongs_to :courier, class_name: 'User'
   belongs_to :customer, class_name: 'User'
